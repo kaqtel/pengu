@@ -1,0 +1,18 @@
+{
+  "name": "pengu",
+  "version": "1.0.0",
+  "description": "bot for discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pengu",
+  "license": "ISC",
+  "dependencies": {
+    "cleverbot-node": "^0.3.11",
+    "discord.js": "^11.3.2",
+    "ffmpeg-binaries": "^4.0.0",
+    "opusscript": "0.0.6",
+    "ytdl-core": "^0.21.1"
+  }
+}
