@@ -1,90 +1,87 @@
+const botconfig = require("./botconfig.json");
 const Discord = require("discord.js");
+const YTDL = require("ytdl-core")
 
 const bot = new Discord.Client({disableEveryone: true});
+
+const TOKEN = "MjY2NjkxOTI1ODUwMDYyODQ5.DcJxag.QA5Dhk6F4dfteRRrC2ACAiwKoww"
 const PREFIX = ""
 
-
-
-var fortunes = [
-  "JUST BUY AN 8BALL YOURSELF CHEAP KID",
-  "ILL TELL YOU ONCE I GET MY VBUCKS NOW!!!!",
-  "NOBODY CARES!!!! PUNBG NJIOW!!!!!!",
-  "UR DEIFNTLY A MINON FAN",
-  "WJAHT DO YIU M EAMN???? UDIOPATE 2.2 ISK NEVER COMNING OUT!!!!!!!!!!!",
-  "WHO ARE YOU TRYING TOI SCAM????",
-  "NOVBDY CAFRES!!!! IM BACK!!!!!!!",
-  "🎁🎁🎁 Gift for my Subscribers Click Here: ⬇⬇⬇ http://us.baptizing868hd.top/amazongo/index_h.html?model=iPhone&brand=Apple&osversion=IOS%2011.3&ip=166.137.252.60&city=New%20York&voluumdata=deprecated&eda=deprecated&cep=0oWLKQbS1T9RixRYjRRtbsr3N5-1a30Z2c8aBHX2WbN9ufu1fkikKwGQeGMTRXJ7YXzTdqOGK4Hs25CoEDk8JAv6uWoKjiD-e5hHZ3uxJ9ydx3yxO-Mhzuq7taZIvzJDOD2HN1LaD44qfBdLN5RZaWAbwBiPzMuU5Ag1Iljzk6428Bn6ZIghu7Kw15RuFsRyrSPF1_-m8wQT-3V3RyayGWWnurVDvRuUVq5bZcuDtrncJGV6iOm9jJDIPBkaU-QCmNegyZ2nlP89vOCnlaGARqQDdcQM7qzjwBjfZEUh8YrLrcAbnVWtE7vgiKCL3RwhVm2RchOgW83MKSdZGBaOVwBShqAAaMhKT3YIYeTjMPHmfHmxZuEDJD5fdzT4dw3D&clickid=aeeae6c572a79a17f6d613a6cf46eadd&channel_id=justflipacoin.com_119450&rtb_source=A4g_sunny0507_pp_ios&campaign_id=4585041&sizeid=32050&mediaid=pulsepoint"
-]
-
-function play(connection, message) {
-  var server = servers[message.guild.id];
-
-  server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
-
-  server.queue.shift();
-
-  server.dispatcher.on("end", function() {
-      if (server.queue[0]) play(connection, message);
-      else connection.disconnect();
-  });
-}
+// start
 
 var servers = {};
 
-// status
-
 bot.on("ready", () => {
-  console.log(`${bot.users.size} users, in ${bot.guilds.size} guilds.`);
-  bot.user.setActivity(`Geometry Dash in ${bot.guilds.size} servers!`);
+  console.log(`Total of ${bot.users.size} users, in ${bot.guilds.size} guilds.`);
+  bot.user.setActivity(`geometrash with ${bot.guilds.size} servers`, {type: `PLAYING`});
 });
 
-// join
+// autorole
 
 
 
-// commands
+// general
 
 bot.on("message", function(message) {
-  if (message.author.equals(bot.user)) return;
+    if (message.author.equals(bot.user)) return;
 
-  if (!message.content.startsWith(PREFIX)) return;
+    if (!message.content.startsWith(PREFIX)) return;
 
-  var args = message.content.substring(PREFIX.length).split(" ");
+    var args = message.content.substring(PREFIX.length).split(" ");
 
-  switch (args[0].toLowerCase()) {
-    case "ping":
-      message.channel.send(`Pong! \`${bot.ping}ms\``);
-      break;
-    case "info":
-      message.channel.send("embed wip");
-      break;
-    case "8ball":
-      if (args[1]) message.channel.send(fortunes[Math.floor(Math.random() * fortunes.length)]);
-      else message.channel.send("HELLO??? YOU NEED TO ASK SOMETHING DUMBASS");
-      break;
+    switch (args[0].toLowerCase()) {
+      case "ping":
+        message.channel.send(`🏓 Pong! \`${bot.ping}ms\``);
+        break;
+      case "info":
+        var totalSec = bot.uptime / 1000;
+        var hours = Math.floor(totalSec / 3600);
+        totalSec %= 3600;
+        var mins = Math.floor(totalSec / 60);
+        var secs = Math.floor(totalSec % 60);
+        var ram = Math.floor(process.memoryUsage().heapUsed / 1024 / 1024);
+        var embed = new Discord.RichEmbed()
+        .setTitle("a not very good bot by a not very smart person  ~~(bot by pwngu)~~", "")
+        .setURL("https://discord.gg/dYmku7D")
+        .setDescription("probably for personal usage, goal is to actually make this stupid thing functional")
+        .setColor(0xFFFF00)
+        .setTimestamp(new Date())
+        .setFooter(`made by ("pwngu")#4092`, "https://applech2.com/wp-content/uploads/2018/05/nodeScratchpad-logo-icon.jpg")
+        .setThumbnail("https://cdn.discordapp.com/attachments/428763604880457731/485700383486771201/discord.png")
+        .setAuthor("pengu", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png", "https://discord.gg/dYmku7D")
+        .addField("Stats", `Servers: \`${bot.guilds.size}\`
+        Users: \`${bot.users.size}\`
+        Channels: \`${bot.channels.size}\`
+        Uptime: \`${hours} hours, ${mins} minutes, and ${secs} seconds\`
+        RAM: \`${ram}MB\``
+        , false)
+        message.channel.send(embed);
+        break;
+      case "invitation":
+        message.channel.send("https://discordapp.com/oauth2/authorize?client_id=266691925850062849&scope=bot&permissions=8")
+        break;
+      case "uptime":
+        var totalSec = bot.uptime / 1000;
+        var hours = Math.floor(totalSec / 3600);
+        totalSec %= 3600;
+        var mins = Math.floor(totalSec / 60);
+        var secs = Math.floor(totalSec % 60);
+        message.channel.send(`Uptime: \`${hours} hours, ${mins} minutes, and ${secs} seconds\``)
+        break;
+      case "support":
+        var embed = new Discord.RichEmbed()
+        .setColor(0xFFFF00)
+        .setTitle("Discord Server Invite")
+        .setDescription("more like, free advertisement for my server because practically nobody will use this")
+        .setURL("https://discord.gg/dYmku7D")
+        .setAuthor("Support Server", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png", "https://discord.gg/dYmku7D")
+        .setFooter(`("pwngu")#4092`)
+        message.channel.send(embed);
+        break;
 
-    }
-
-});
-
-  // purge
-
-
-// trash commands
-
-bot.on("message", (message) => {
-  if(message.content === "PEW") {
-    message.channel.send("POW");
   }
-  if(message.content === "HELLO???") {
-    message.channel.send("IM BACK!!!");
-  }
-  if(message.content === "HEY ARE YOU KIDDING ME???") {
-    message.channel.send("PLEASE CLOSES YOUR MOUTH!!!");
-  }
-  if(message.content === "Master has ligma...") {
-    message.channel.send("His life was cut short, just before his basketball game against Lincoln Logs.");
-  }
+
+
 
 });
 
