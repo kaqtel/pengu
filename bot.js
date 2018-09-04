@@ -4,7 +4,6 @@ const YTDL = require("ytdl-core")
 
 const bot = new Discord.Client({disableEveryone: true});
 
-const TOKEN = "MjY2NjkxOTI1ODUwMDYyODQ5.DcJxag.QA5Dhk6F4dfteRRrC2ACAiwKoww"
 const PREFIX = ""
 
 // start
