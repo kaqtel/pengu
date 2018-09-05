@@ -1,10 +1,10 @@
+const botconfig = require("./botconfig.json");
 const Discord = require("discord.js");
 const YTDL = require("ytdl-core")
 
 const bot = new Discord.Client({disableEveryone: true});
 
 const PREFIX = ""
-
 
 const result_images = [
   "https://vignette.wikia.nocookie.net/geometry-dash/images/2/28/SecretCoin.png/revision/latest?cb=20171218125026",
@@ -29,7 +29,6 @@ const result_footer = [
   "",
   "protip: you just won the lottery"
 ]
-
 
 // start
 
@@ -74,10 +73,10 @@ bot.on("message", function(message) {
         .setThumbnail("https://cdn.discordapp.com/attachments/428763604880457731/485700383486771201/discord.png")
         .setAuthor("pengu", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png", "https://discord.gg/dYmku7D")
         .addField("Stats", `Servers: \`${bot.guilds.size}\`
-        Users: \`${bot.users.size}\`
-        Channels: \`${bot.channels.size}\`
-        Uptime: \`${hours} hours, ${mins} minutes, and ${secs} seconds\`
-        RAM: \`${ram}MB\``
+      Users: \`${bot.users.size}\`
+      Channels: \`${bot.channels.size}\`
+      Uptime: \`${hours} hours, ${mins} minutes, and ${secs} seconds\`
+      RAM: \`${ram}MB\``
         , false)
         message.channel.send(embed);
         break;
@@ -135,11 +134,14 @@ bot.on("message", function(message) {
           ;
           message.channel.send(rich_embed)
 
+
   }
 
 
 
 });
+
+
 
 
 bot.login(process.env.BOT_TOKEN)
