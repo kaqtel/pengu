@@ -5,6 +5,32 @@ const bot = new Discord.Client({disableEveryone: true});
 
 const PREFIX = ""
 
+
+const result_images = [
+  "https://vignette.wikia.nocookie.net/geometry-dash/images/2/28/SecretCoin.png/revision/latest?cb=20171218125026",
+  "https://vignette.wikia.nocookie.net/geometry-dash/images/3/38/UserCoinVerified.png/revision/latest?cb=20171203235714",
+  "https://vignette.wikia.nocookie.net/geometry-dash/images/a/a6/UserCoinConcept.png/revision/latest?cb=20150930055737"
+];
+
+const results = [
+  "Heads",
+  "Tails",
+  "GUESS WHO WON THE LOTTERY???",
+];
+
+const result_colors = [
+  "0xFFFF00",
+  "0xC0C0C0",
+  "0x00FFFF"
+]
+
+const result_footer = [
+  "",
+  "",
+  "protip: you just won the lottery"
+]
+
+
 // start
 
 var servers = {};
