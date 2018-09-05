@@ -76,6 +76,10 @@ bot.on("message", function(message) {
         .setFooter(`("pwngu")#4092`)
         message.channel.send(embed);
         break;
+      case "coinflip":
+        let coins = ["Heads, Tails"];
+        let coinsIndex = Math.round(Math.random() * coins.length);
+        message.channel.send(outcomes[outcomesIndex])
 
   }
 
