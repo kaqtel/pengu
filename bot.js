@@ -133,6 +133,7 @@ bot.on("message", function(message) {
           .setFooter(footer)
           ;
           message.channel.send(rich_embed)
+        break;
 
 
   }
