@@ -77,9 +77,37 @@ bot.on("message", function(message) {
         message.channel.send(embed);
         break;
       case "coinflip":
-        let coins = ["Heads, Tails"];
-        let coinsIndex = Math.round(Math.random() * coins.length);
-        message.channel.send(outcomes[outcomesIndex])
+        var minimum = 1;
+        var maximum = 175000000
+        var chance = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+        var embed = new Discord.RichEmbed()
+        let result;
+        let image;
+        if (chance > 87500001) {
+          result = results[0];
+          image = result_images[0];
+          colors = result_colors[0];
+          footer = result_footer[0];
+        }
+        else if (chance > 2) {
+          result = results[1];
+          image = result_images[1];
+          colors = result_colors[1];
+          footer = result_footer[1];
+        }
+        else {
+          result = results[2];
+          image = result_images[2];
+          colors = result_colors[2];
+          footer = result_footer[2]
+        }
+        var rich_embed = new Discord.RichEmbed()
+          .setAuthor(result)
+          .setImage(image)
+          .setColor(colors)
+          .setFooter(footer)
+          ;
+          message.channel.send(rich_embed)
 
   }
 
