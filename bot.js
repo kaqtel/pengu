@@ -208,9 +208,15 @@ bot.on("message", function(message) {
           ;
           message.channel.send(rich_embed)
           break;
-        
+
+
+
+
+
   }
-  
+
+
+
 });
 
 bot.login(process.env.BOT_TOKEN)
