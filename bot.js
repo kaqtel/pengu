@@ -1,4 +1,3 @@
-const botconfig = require("./botconfig.json");
 const Discord = require("discord.js");
 const YTDL = require("ytdl-core")
 
@@ -6,7 +5,29 @@ const bot = new Discord.Client({disableEveryone: true});
 
 const PREFIX = ""
 
+const result_images = [
+  "https://vignette.wikia.nocookie.net/geometry-dash/images/2/28/SecretCoin.png/revision/latest?cb=20171218125026",
+  "https://vignette.wikia.nocookie.net/geometry-dash/images/3/38/UserCoinVerified.png/revision/latest?cb=20171203235714",
+  "https://vignette.wikia.nocookie.net/geometry-dash/images/a/a6/UserCoinConcept.png/revision/latest?cb=20150930055737"
+];
 
+const results = [
+  "Heads",
+  "Tails",
+  "GUESS WHO WON THE LOTTERY???",
+];
+
+const result_colors = [
+  "0xFFFF00",
+  "0xC0C0C0",
+  "0x00FFFF"
+]
+
+const result_footer = [
+  "",
+  "",
+  "protip: you just won the lottery"
+]
 
 // start
 
@@ -50,11 +71,11 @@ bot.on("message", function(message) {
         .setFooter(`made by ("pwngu")#4092`, "https://applech2.com/wp-content/uploads/2018/05/nodeScratchpad-logo-icon.jpg")
         .setThumbnail("https://cdn.discordapp.com/attachments/428763604880457731/485700383486771201/discord.png")
         .setAuthor("pengu", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png", "https://discord.gg/dYmku7D")
-        .addField("Stats", `Servers: \`${bot.guilds.size}\`
-      Users: \`${bot.users.size}\`
-      Channels: \`${bot.channels.size}\`
-      Uptime: \`${hours} hours, ${mins} minutes, and ${secs} seconds\`
-      RAM: \`${ram}MB\``
+        .addField("Stats", `Servers: \`${bot.guilds.size}\`` + '\n' +
+      `Users: \`${bot.users.size}\`` + '\n' +
+      `Channels: \`${bot.channels.size}\`` + '\n' +
+      `Uptime: \`${hours} hours, ${mins} minutes, and ${secs} seconds\`` + '\n' +
+      `RAM: \`${ram}MB\``
         , false)
         message.channel.send(embed);
         break;
@@ -79,14 +100,47 @@ bot.on("message", function(message) {
         .setFooter(`("pwngu")#4092`)
         message.channel.send(embed);
         break;
-     
+      case "coinflip":
+        var minimum = 1;
+        var maximum = 175000000
+        var chance = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+        var embed = new Discord.RichEmbed()
+        let result;
+        let image;
+        if (chance > 87500001) {
+          result = results[0];
+          image = result_images[0];
+          colors = result_colors[0];
+          footer = result_footer[0];
+        }
+        else if (chance > 2) {
+          result = results[1];
+          image = result_images[1];
+          colors = result_colors[1];
+          footer = result_footer[1];
+        }
+        else {
+          result = results[2];
+          image = result_images[2];
+          colors = result_colors[2];
+          footer = result_footer[2]
+        }
+        var rich_embed = new Discord.RichEmbed()
+          .setAuthor(result)
+          .setImage(image)
+          .setColor(colors)
+          .setFooter(footer)
+          ;
+          message.channel.send(rich_embed)
+          break;
+
+
+
+
   }
 
 
 
 });
-
-
-
 
 bot.login(process.env.BOT_TOKEN)
