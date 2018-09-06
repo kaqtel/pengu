@@ -38,7 +38,15 @@ bot.on("ready", () => {
   bot.user.setActivity(`geometrash with ${bot.guilds.size} servers`, {type: `PLAYING`});
 });
 
-// autorole
+// tagging
+
+
+bot.on('message', message => {
+  if (message.isMentioned(bot.user)) {
+    message.reply("STOP TAGGING ME!!!!!!")
+  }
+});
+
 
 
 
@@ -69,7 +77,7 @@ bot.on("message", function(message) {
         .setDescription("probably for personal usage, goal is to actually make this stupid thing functional")
         .setColor(0xFFFF00)
         .setTimestamp(new Date())
-        .setFooter(`made by ("pwngu")#4092`, "https://applech2.com/wp-content/uploads/2018/05/nodeScratchpad-logo-icon.jpg")
+        .setFooter(`made by ("pwngu")#1290`, "https://applech2.com/wp-content/uploads/2018/05/nodeScratchpad-logo-icon.jpg")
         .setThumbnail("https://cdn.discordapp.com/attachments/428763604880457731/485700383486771201/discord.png")
         .setAuthor("pengu", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png", "https://discord.gg/dYmku7D")
         .addField("Stats", `Servers: \`${bot.guilds.size}\`` + '\n' +
@@ -98,9 +106,63 @@ bot.on("message", function(message) {
         .setDescription("more like, free advertisement for my server because practically nobody will use this")
         .setURL("https://discord.gg/dYmku7D")
         .setAuthor("Support Server", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png", "https://discord.gg/dYmku7D")
-        .setFooter(`("pwngu")#4092`)
+        .setFooter(`made by ("pwngu")#1290`, "https://applech2.com/wp-content/uploads/2018/05/nodeScratchpad-logo-icon.jpg")
         message.channel.send(embed);
         break;
+      case "serverinfo":
+        var embed = new Discord.RichEmbed()
+        .setColor(0xFFFF00)
+        .setTimestamp(new Date())
+        .setFooter(`made by ("pwngu")#4092`, "https://applech2.com/wp-content/uploads/2018/05/nodeScratchpad-logo-icon.jpg")
+        .setTitle(`${message.guild.name} is a server that is owned by ${message.guild.owner.displayName} with a total of ${message.guild.memberCount} members!`)
+        .setURL(`https://discord.gg/dYmku7D`)
+        .setThumbnail(`${message.guild.iconURL}`)
+        .setAuthor(`${message.guild.name}`, "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png", "")
+        .addField("Server Info", `Name: \`${message.guild.name}\`` + '\n' +
+      `Server ID: \`${message.guild.id}\`` + '\n' +
+      `Owner: \`${message.guild.owner.displayName}\`` + '\n' +
+      `Members: \`${message.guild.memberCount}\`` + '\n' +
+      `Region: \`${message.guild.region}\``
+        , false)
+        message.channel.send(embed);
+        break;
+      case "channelinfo":
+        var ch;
+        if (message.mentions.channels.first() !== undefined) {
+          ch = message.mentions.channels.first();
+        } else {
+          ch = message.channel;
+  }
+        var embed = new Discord.RichEmbed()
+        .setColor(0xFFFF00)
+        .setTitle(`#${ch.name}`)
+        .setDescription(`${message.channel.topic}`)
+        .addField("Channel Info", `Name: \`${ch.name}\`` + '\n' +
+      `Channel ID: \`${ch.id}\`` + '\n' +
+      `Creation Date: \`${ch.createdAt}\`` + '\n' +
+      `Users: \`${ch.members.size}\``, false)
+        message.channel.send(embed);
+        break;
+      case "channels":
+        let text = message.guild.channels.filter(c => c.type === "text").map(c => c.name).join('\n');
+        let voice = message.guild.channels.filter(c => c.type === "voice").map(c => c.name).join('\n');
+        var embed = new Discord.RichEmbed()
+        .setColor(0xFFFF00)
+        .addField("Text Channels", `${text}`, true)
+        .addField("Voice Channels", `${voice}`, true)
+        .setFooter(`There is ${message.guild.channels.filter(r => r.name).size} channel(s) in total`)
+        message.channel.send(embed);
+        break;
+      case "emotes":
+        let emotes = message.channel.guild.emojis.array(e => `:${e.name}:`).join('  ')
+        var embed = new Discord.RichEmbed()
+          .setAuthor(`${message.guild.name} emotes`, "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
+          .setDescription(emotes)
+          .setColor(0xFFFF00)
+          .setTimestamp(new Date())
+          .setFooter(`Total of ${message.guild.emojis.size} emotes`)
+          message.channel.send(embed);
+          break;
       case "coinflip":
         var minimum = 1;
         var maximum = 175000000
@@ -134,6 +196,7 @@ bot.on("message", function(message) {
           ;
           message.channel.send(rich_embed)
           break;
+
 
 
 
