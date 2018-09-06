@@ -3,6 +3,7 @@ const YTDL = require("ytdl-core")
 
 const bot = new Discord.Client({disableEveryone: true});
 
+const TOKEN = "MjY2NjkxOTI1ODUwMDYyODQ5.DnFc0A.TPOyy8W1Fo1AaPjnzJtg6iqRlv4"
 const PREFIX = ""
 
 const result_images = [
@@ -97,7 +98,7 @@ bot.on("message", function(message) {
         totalSec %= 3600;
         var mins = Math.floor(totalSec / 60);
         var secs = Math.floor(totalSec % 60);
-        message.channel.send(`Uptime: **`${hours} hours, ${mins} minutes, and ${secs} seconds**``)
+        message.channel.send(`Uptime: \`${hours} hours, ${mins} minutes, and ${secs} seconds\``)
         break;
       case "support":
         var embed = new Discord.RichEmbed()
@@ -108,18 +109,6 @@ bot.on("message", function(message) {
         .setAuthor("Support Server", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png", "https://discord.gg/dYmku7D")
         .setFooter(`made by ("pwngu")#1290`, "https://applech2.com/wp-content/uploads/2018/05/nodeScratchpad-logo-icon.jpg")
         message.channel.send(embed);
-        break;
-      case "profile":
-       var embed = new Discord.RichEmbed()
-        .setColor(0xFFFF00)
-        .setAuthor('${message.user.displayName}`, "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png"
-        .setThumbnail(`${message.user.iconURL}`)
-        .setTimestamp(new Date())
-        .setFooter(`made by ("pwngu")#4092`, "https://applech2.com/wp-content/uploads/2018/05/nodeScratchpad-logo-icon.jpg"          
-        .addField("User Info", `Status: \`${message.user.status}\`` + `\n` +
-      `User ID: \`${message.user.id}\`` + `\n` +
-      `Join Date: \`${message.user.createdAt}\``, false)
-        message.channel.send(embed)
         break;
       case "serverinfo":
         var embed = new Discord.RichEmbed()
@@ -147,8 +136,8 @@ bot.on("message", function(message) {
   }
         var embed = new Discord.RichEmbed()
         .setColor(0xFFFF00)
-        .setTitle(`#${ch.name}`)
-        .setDescription(`${message.channel.topic}`)
+        .setAuthor(`#${ch.name}`, "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
+        .setDescription(`${message.channel.topic}`, "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
         .addField("Channel Info", `Name: \`${ch.name}\`` + '\n' +
       `Channel ID: \`${ch.id}\`` + '\n' +
       `Creation Date: \`${ch.createdAt}\`` + '\n' +
@@ -209,14 +198,9 @@ bot.on("message", function(message) {
           message.channel.send(rich_embed)
           break;
 
-
-
-
-
   }
 
-
-
 });
+
 
 bot.login(process.env.BOT_TOKEN)
