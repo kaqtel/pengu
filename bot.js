@@ -53,7 +53,8 @@ bot.on("message", function(message) {
 
     switch (args[0].toLowerCase()) {
       case "ping":
-        message.channel.send(`🏓 Pong! \`${bot.ping}ms\``);
+        let ping = Math.round(bot.ping);
+        message.channel.send(`🏓 Pong! \`${ping}ms\``);
         break;
       case "info":
         var totalSec = bot.uptime / 1000;
