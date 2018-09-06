@@ -109,18 +109,6 @@ bot.on("message", function(message) {
         .setFooter(`made by ("pwngu")#1290`, "https://applech2.com/wp-content/uploads/2018/05/nodeScratchpad-logo-icon.jpg")
         message.channel.send(embed);
         break;
-      case "profile":
-       var embed = new Discord.RichEmbed()
-        .setColor(0xFFFF00)
-        .setAuthor('${message.user.displayName}`, "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png"
-        .setThumbnail(`${message.user.iconURL}`)
-        .setTimestamp(new Date())
-        .setFooter(`made by ("pwngu")#4092`, "https://applech2.com/wp-content/uploads/2018/05/nodeScratchpad-logo-icon.jpg"          
-        .addField("User Info", `Status: \`${message.user.status}\`` + `\n` +
-      `User ID: \`${message.user.id}\`` + `\n` +
-      `Join Date: \`${message.user.createdAt}\``, false)
-        message.channel.send(embed)
-        break;
       case "serverinfo":
         var embed = new Discord.RichEmbed()
         .setColor(0xFFFF00)
@@ -209,13 +197,7 @@ bot.on("message", function(message) {
           message.channel.send(rich_embed)
           break;
 
-
-
-
-
   }
-
-
 
 });
 
