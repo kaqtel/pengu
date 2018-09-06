@@ -97,7 +97,7 @@ bot.on("message", function(message) {
         totalSec %= 3600;
         var mins = Math.floor(totalSec / 60);
         var secs = Math.floor(totalSec % 60);
-        message.channel.send(`Uptime: \`${hours} hours, ${mins} minutes, and ${secs} seconds\``)
+        message.channel.send(`Uptime: **`${hours} hours, ${mins} minutes, and ${secs} seconds**``)
         break;
       case "support":
         var embed = new Discord.RichEmbed()
