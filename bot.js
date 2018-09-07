@@ -72,7 +72,7 @@ bot.on("message", function(message) {
         .setColor(0xFFFF00)
         .setAuthor("Command List", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
         .addField("Fun", `\`8ball\` \`coinflip\`)
-        .addField("Utility", `\`ping\` \`info\` \`serverinfo\` \`channelinfo\` \`emotes\` \`invitation\` \`support\` `)
+        .addField("Utility", `\`ping\` \`info\` \`serverin\` \`channelinfo\` \`emotes\` \`invitation\` `)
         message.channel.send(embed);
         break;
       case "info":
@@ -103,16 +103,6 @@ bot.on("message", function(message) {
         break;
       case "invitation":
         message.channel.send("https://discordapp.com/oauth2/authorize?client_id=266691925850062849&scope=bot&permissions=8")
-        break;
-      case "support":
-        var embed = new Discord.RichEmbed()
-        .setColor(0xFFFF00)
-        .setTitle("Discord Server Invite")
-        .setDescription("more like, free advertisement for my server because practically nobody will use this")
-        .setURL("https://discord.gg/dYmku7D")
-        .setAuthor("Support Server", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png", "https://discord.gg/dYmku7D")
-        .setFooter(`made by ("pwngu")#1290`, "https://applech2.com/wp-content/uploads/2018/05/nodeScratchpad-logo-icon.jpg")
-        message.channel.send(embed);
         break;
       case "serverinfo":
         var embed = new Discord.RichEmbed()
