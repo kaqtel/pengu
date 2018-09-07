@@ -3,7 +3,6 @@ const YTDL = require("ytdl-core")
 
 const bot = new Discord.Client({disableEveryone: true});
 
-const TOKEN = "dont even look at history for this one because i already regenerated it lol"
 const PREFIX = ""
 
 const result_images = [
@@ -29,6 +28,7 @@ const result_footer = [
   "",
   "protip: you just won the lottery"
 ]
+
 
 
 
@@ -71,12 +71,13 @@ bot.on("message", function(message) {
         var embed = new Discord.RichEmbed()
         .setColor(0xFFFF00)
         .setAuthor("Command List", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
-        .addField("Fun", `\`8ball\` \`coinflip\`)
-        .addField("Utility", `\`ping\` \`info\` \`serverin\` \`channelinfo\` \`emotes\` \`invitation\` `)
+        .addField(`Fun`, `\`8ball\` \`coinflip\``)
+        .addField(`Utility`, `\`ping\` \`info\` \`serverinfo\` \`channelinfo\` \`emotes\``, true)
         message.channel.send(embed);
         break;
       case "info":
         var totalSec = bot.uptime / 1000;
+        var days = Math.floor(totalSec / 216000);
         var hours = Math.floor(totalSec / 3600);
         totalSec %= 3600;
         var mins = Math.floor(totalSec / 60);
@@ -94,15 +95,14 @@ bot.on("message", function(message) {
         .addField("Stats", `Servers: \`${bot.guilds.size}\`` + '\n' +
       `Users: \`${bot.users.size}\`` + '\n' +
       `Channels: \`${bot.channels.size}\`` + '\n' +
-      `Uptime: \`${hours} hours, ${mins} minutes, and ${secs} seconds\`` + '\n' +
+      `Uptime: \`${days} days, ${hours} hours, ${mins} minutes, and ${secs} seconds\`` + '\n' +
       `RAM: \`${ram}MB\``
         , false)
         .addField("Usage", `To get started, type "help" to see my list of commands`)
-        .addField("Support", `To report a bug or request help, join the support server`)
+        .addField("Bot Invite", `Click [here](https://discordapp.com/oauth2/authorize?client_id=266691925850062849&scope=bot&permissions=8) to invite this bot to your server!`)
+        .addField("Support", `To report a bug or request help, join the [support server](https://discord.gg/dYmku7D)` + `\n` +
+        `You may also alternatively message ("pwngu")#0281`, true)
         message.channel.send(embed);
-        break;
-      case "invitation":
-        message.channel.send("https://discordapp.com/oauth2/authorize?client_id=266691925850062849&scope=bot&permissions=8")
         break;
       case "serverinfo":
         var embed = new Discord.RichEmbed()
@@ -127,7 +127,7 @@ bot.on("message", function(message) {
           ch = message.mentions.channels.first();
         } else {
           ch = message.channel;
-  }
+        }
         var embed = new Discord.RichEmbed()
         .setColor(0xFFFF00)
         .setAuthor(`#${ch.name} | Info`, "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
@@ -173,20 +173,122 @@ bot.on("message", function(message) {
           colors = result_colors[2];
           footer = result_footer[2]
         }
-        var rich_embed = new Discord.RichEmbed()
+        var embed = new Discord.RichEmbed()
           .setAuthor(result)
           .setImage(image)
           .setColor(colors)
           .setFooter(footer)
-          ;
-          message.channel.send(rich_embed)
+          message.channel.send(embed)
           break;
-        
+      case "8ball":
+        if (message.content == ('8ball')) {
+          let log = `someone did not ask a QUESTION`;
+          message.reply(`YOU DIDNT ASK ANYTHING!!!`)
+          .then(console.log(log))
+          .catch(console.error);
+          return log;
+        }
+        const fortune = [
+        "deifjntly!!!",
+        "im not racist, but im certain",
+        "when in doubt, always buy lincoln logs",
+        "Yes",
+        "most likely!!!",
+        "i smell a yes answer",
+        "srry i need to turn on my brain, try again",
+        "srry im going to have to scam you, try again",
+        "im not a prophet!!! stop asking me!!!",
+        "novbdy cafres!!!!!",
+        "Bet",
+        "srry i dont think so kid",
+        "not to be racist or anything, but novbdy cafres!!!",
+        "Nope",
+        "Maybe",
+        "Try Again"
+      ];
+        var min = 0;
+        var max = fortune.length - 1;
+        var random = Math.floor(Math.random() * (max - min + 1)) + min;
+        var embed = new Discord.RichEmbed()
+          .setColor(0xFFFFFF)
+          .setAuthor(`pengu's "magic" 8-ball`, "https://cdn.discordapp.com/attachments/428763604880457731/487760812799295500/8ball.png")
+          .addField(`**Answer**`, fortune[random], false)
+          message.channel.send(embed)
+          break;
+      case "9ball":
+        if (message.content == ('9ball')) {
+          let log = `some did a incorrect`;
+          message.reply('HELLO??? YOU DISGUSTING NIFAJIT!!! YOU NEED TO ASK SOMETHING!')
+          .then(console.log(log))
+          .catch(console.error);
+          return log;
+        }
+        var fortunes = [
+          "JUST BUY AN 8BALL YOURSELF CHEAP KID",
+          "ILL TELL YOU ONCE I GET MY VBUCKS NOW!!!!",
+          "NOBODY CARES!!!! PUNBG NJIOW!!!!!!",
+          "UR DEIFNTLY A MINON FAN",
+          "WJAHT DO YIU M EAMN???? UDIOPATE 2.2 ISK NEVER COMNING OUT!!!!!!!!!!!",
+          "WHO ARE YOU TRYING TOI SCAM????",
+          "NOVBDY CAFRES!!!! IM BACK!!!!!!!",
+          "?????? Gift for my Subscribers Click Here: ??? http://us.baptizing868hd.top/amazongo/index_h.html?model=iPhone&brand=Apple&osversion=IOS%2011.3&ip=166.137.252.60&city=New%20York&voluumdata=deprecated&eda=deprecated&cep=0oWLKQbS1T9RixRYjRRtbsr3N5-1a30Z2c8aBHX2WbN9ufu1fkikKwGQeGMTRXJ7YXzTdqOGK4Hs25CoEDk8JAv6uWoKjiD-e5hHZ3uxJ9ydx3yxO-Mhzuq7taZIvzJDOD2HN1LaD44qfBdLN5RZaWAbwBiPzMuU5Ag1Iljzk6428Bn6ZIghu7Kw15RuFsRyrSPF1_-m8wQT-3V3RyayGWWnurVDvRuUVq5bZcuDtrncJGV6iOm9jJDIPBkaU-QCmNegyZ2nlP89vOCnlaGARqQDdcQM7qzjwBjfZEUh8YrLrcAbnVWtE7vgiKCL3RwhVm2RchOgW83MKSdZGBaOVwBShqAAaMhKT3YIYeTjMPHmfHmxZuEDJD5fdzT4dw3D&clickid=aeeae6c572a79a17f6d613a6cf46eadd&channel_id=justflipacoin.com_119450&rtb_source=A4g_sunny0507_pp_ios&campaign_id=4585041&sizeid=32050&mediaid=pulsepoint",
+          "I AGREE, I AGREE SO MUCH!!!!!",
+          "HAHHA MORE LIKE MASTERPLAYS LOVES DICK IN HIS MOUTH",
+          "WHAT THE FUCK IS WRONG WITH YOU?????",
+          "BE SURE TO JOIN MY AWESOME SERVER: https://discord.gg/dYmku7D",
+          "YOU ARE UNBELIEVABLE. IM NOT ANSWERING UR CHEAP QUESTIONS!!!!!",
+          "WHAT ARE YOU TALKING ABOUT I ALREADY KNOW KOTA LOVES MEN",
+          "My number boys, Text Me :) 7342772307",
+          "ARE YOU HAVE MANY  STUPID?????",
+          "HAHAHAHAHA IM NOT ANSWERING BIG SCAMMERS",
+          "ARE YOU A SHEEP OR SOMETHING?????",
+          "WHO EVEN ARE YOU KID??? ALL YOU DO IS POST AT 11:11 DISGUSTIJNG NIFAJIT!!!",
+          "BLACK LIVES MATTER??? MORE LIKE NOBODY MATTERS HAHAHAHAHHA",
+          "YE S  IKJOWW PANDA WATCHES RWBY LEIFKE A BFIG LOSSER",
+          "PWNGU LIKES FEMALES!!!! U DIGUSTING KID",
+          "THIS IS UNBEGIALBLE",
+          "WHY ARE YOU ASKING ME KID????",
+          "WHAT ARE YOU ASKING ME FOR???",
+          "DO YOU HAVE A BETTER QUESTION??? U DISGUSTING KID",
+          "good question",
+          "Why would you say something so controversial, yet so brave?",
+          "NOBOGFYD CAFERS!!!!! KILL THE WHALES NOW!!!",
+          "NOT TO BE RACIST OR ANYTHING, BUT NOLVBKDY CAFRES!!!!!!!!",
+          "OH IM SRRY, ARE YOU ENTITLED TO AN ANSWER??? TOO BAD NIFAJIT!!! AHHAAHAHHAHAHAHA",
+          "Yes.",
+          "No.",
+          "Try again.",
+          "Probably",
+          "WHAT???",
+          "WHO IS TAGGING ME????",
+          "WHAT DID I JUST SAY??? NO ACE ATOTONREY!!!!!",
+          "OF COURSE MASTER LIKES BOYS!!! HE LIKES BIG PEEPEE IN MOUTH!!!",
+          "MORE LIKE, PWNGU IS NEVER RELEASING A NEW LEVEL!!!!",
+          "MORE LIKE WOOGI141 IS NEVER RELEASING HIS NEW **HARD** LEVEL!!!!!!!",
+          "WYATCH OUT RL YO UMIFH END UDP EWJTH A SHEEP",
+          "BRO CHILL WITH THE RACISM",
+          "WHOA!!! CHILL KID",
+          "STOP ASKING ME THESE DIRTY QUESTIONS!!!!!",
+          "You know what, Fuck You, I don't care what you say. I want to kill the whales.",
+          "Awesome buddy! Be sure to check out my YouTube: https://www.youtube.com/c/pwngu",
+          "Be sure to donate my Paypal at mathematicalmagician@gmail.com",
+          "use this link when pwngu streams: https://streamlabs.com/pengulengu",
+          "NOBODY CARES!!!! STREAKS NOW!!!"
+        ];
+        var min = 0;
+        var max = fortunes.length - 1;
+        var random = Math.floor(Math.random() * (max - min + 1)) + min;
+        var embed = new Discord.RichEmbed()
+          .setColor(0xFFFFFF)
+          .setAuthor(`pengu's incredible and magical 9-ball`, "https://cdn.discordapp.com/attachments/428763604880457731/487763090306367498/9ball.png")
+          .addField(`**Answer**`, fortunes[random], false)
+          message.channel.send(embed)
+          break;
+      case "robtop":
+        message.channel.send(``)
   }
 
 });
-
-
 
 
 
