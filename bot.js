@@ -3,7 +3,7 @@ const YTDL = require("ytdl-core")
 
 const bot = new Discord.Client({disableEveryone: true});
 
-const TOKEN = "MjY2NjkxOTI1ODUwMDYyODQ5.DnFc0A.TPOyy8W1Fo1AaPjnzJtg6iqRlv4"
+const TOKEN = "dont even look at history for this one because i already regenerated it lol"
 const PREFIX = ""
 
 const result_images = [
