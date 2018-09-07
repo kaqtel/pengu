@@ -71,6 +71,7 @@ bot.on("message", function(message) {
         var embed = new Discord.RichEmbed()
         .setColor(0xFFFF00)
         .setAuthor("Command List", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
+        .addField("Fun", `\`8ball\` \`coinflip\`)
         .addField("Utility", `\`ping\` \`info\` \`serverinfo\` \`channelinfo\` \`emotes\` \`invitation\` \`support\` `)
         message.channel.send(embed);
         break;
@@ -96,6 +97,8 @@ bot.on("message", function(message) {
       `Uptime: \`${hours} hours, ${mins} minutes, and ${secs} seconds\`` + '\n' +
       `RAM: \`${ram}MB\``
         , false)
+        .addField("Usage", `To get started, type "help" to see my list of commands`)
+        .addField("Support", `To report a bug or request help, join the support server`)
         message.channel.send(embed);
         break;
       case "invitation":
