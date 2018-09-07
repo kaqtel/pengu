@@ -30,6 +30,8 @@ const result_footer = [
   "protip: you just won the lottery"
 ]
 
+
+
 // start
 
 var servers = {};
@@ -65,6 +67,13 @@ bot.on("message", function(message) {
         let ping = Math.round(bot.ping);
         message.channel.send(`🏓 Pong! \`${ping}ms\``);
         break;
+      case "help":
+        var embed = new Discord.RichEmbed()
+        .setColor(0xFFFF00)
+        .setAuthor("Command List", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
+        .addField("Utility", `\`ping\` \`info\` \`serverinfo\` \`channelinfo\` \`emotes\` \`invitation\` \`support\` `)
+        message.channel.send(embed);
+        break;
       case "info":
         var totalSec = bot.uptime / 1000;
         var hours = Math.floor(totalSec / 3600);
@@ -91,14 +100,6 @@ bot.on("message", function(message) {
         break;
       case "invitation":
         message.channel.send("https://discordapp.com/oauth2/authorize?client_id=266691925850062849&scope=bot&permissions=8")
-        break;
-      case "uptime":
-        var totalSec = bot.uptime / 1000;
-        var hours = Math.floor(totalSec / 3600);
-        totalSec %= 3600;
-        var mins = Math.floor(totalSec / 60);
-        var secs = Math.floor(totalSec % 60);
-        message.channel.send(`Uptime: \`${hours} hours, ${mins} minutes, and ${secs} seconds\``)
         break;
       case "support":
         var embed = new Discord.RichEmbed()
@@ -136,22 +137,12 @@ bot.on("message", function(message) {
   }
         var embed = new Discord.RichEmbed()
         .setColor(0xFFFF00)
-        .setAuthor(`#${ch.name}`, "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
-        .setDescription(`${message.channel.topic}`, "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
-        .addField("Channel Info", `Name: \`${ch.name}\`` + '\n' +
+        .setAuthor(`#${ch.name} | Info`, "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
+        .setDescription(`Name: \`${ch.name}\`` + '\n' +
       `Channel ID: \`${ch.id}\`` + '\n' +
+      `Topic: \`${message.channel.topic}\`` + `\n` +
       `Creation Date: \`${ch.createdAt}\`` + '\n' +
-      `Users: \`${ch.members.size}\``, false)
-        message.channel.send(embed);
-        break;
-      case "channels":
-        let text = message.guild.channels.filter(c => c.type === "text").map(c => c.name).join('\n');
-        let voice = message.guild.channels.filter(c => c.type === "voice").map(c => c.name).join('\n');
-        var embed = new Discord.RichEmbed()
-        .setColor(0xFFFF00)
-        .addField("Text Channels", `${text}`, true)
-        .addField("Voice Channels", `${voice}`, true)
-        .setFooter(`There is ${message.guild.channels.filter(r => r.name).size} channel(s) in total`)
+      `Users: \`${ch.members.size}\``)
         message.channel.send(embed);
         break;
       case "emotes":
@@ -197,10 +188,13 @@ bot.on("message", function(message) {
           ;
           message.channel.send(rich_embed)
           break;
-
+        
   }
 
 });
+
+
+
 
 
 bot.login(process.env.BOT_TOKEN)
