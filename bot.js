@@ -29,7 +29,17 @@ const result_footer = [
   "protip: you just won the lottery"
 ]
 
+const rps_symbols = [
+  "🌑",
+  "📄",
+  "✂"
+];
 
+const rps_outcomes = [
+  "winner winner chicken dinner",
+  "so sad :( , can this hit 0 likes",
+  "accident"
+];
 
 
 // start
@@ -71,7 +81,7 @@ bot.on("message", function(message) {
         var embed = new Discord.RichEmbed()
         .setColor(0xFFFF00)
         .setAuthor("Command List", "https://cdn2.scratch.mit.edu/get_image/gallery/1948491_200x130.png")
-        .addField(`Fun`, `\`8ball\` \`coinflip\``)
+        .addField(`Fun`, `\`8ball\` \`rps\` \`coinflip\``)
         .addField(`Utility`, `\`ping\` \`info\` \`serverinfo\` \`channelinfo\` \`emotes\``, true)
         message.channel.send(embed);
         break;
@@ -149,9 +159,9 @@ bot.on("message", function(message) {
           message.channel.send(embed);
           break;
       case "coinflip":
-        var minimum = 1;
-        var maximum = 175000000
-        var chance = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+        var min = 1;
+        var max = 175000000
+        var chance = Math.floor(Math.random() * (max - min + 1)) + min;
         var embed = new Discord.RichEmbed()
         let result;
         let image;
@@ -178,7 +188,7 @@ bot.on("message", function(message) {
           .setImage(image)
           .setColor(colors)
           .setFooter(footer)
-          message.channel.send(embed)
+          message.channel.send(embed);
           break;
       case "8ball":
         if (message.content == ('8ball')) {
@@ -285,11 +295,62 @@ bot.on("message", function(message) {
           message.channel.send(embed)
           break;
       case "robtop":
-        message.channel.send(``)
+        message.channel.send(`<:1_:471087645481631744><:2_:471087645259464725>` + `\n` +
+        `<:3_:471087645506928660><:4_:471087645590814720>`)
+        break;
+      case "rps":
+        let rps_choice = message.content.substring((`rps `).length);
+
+        if (rps_choice != 'r' && rps_choice != 'p' && rps_choice != 's') {
+          let log = `someone did not properly play rock paper gun`;
+          message.reply(`You actually need to choose an option.`)
+          .then(console.log(log))
+          .catch(console.error);
+          return log;
+        }
+
+        if (rps_choice == 'r')  {
+          rps_choice = rps_symbols[0];
+        }
+        else if (rps_choice == 'p') {
+          rps_choice = rps_symbols[1];
+        }
+        else if (rps_choice == 's') {
+          rps_choice = rps_symbols[2];
+        }
+
+        var min = 0;
+        var max = 2;
+        var bot_rps_choice = rps_symbols[Math.floor(Math.random() * (max - min + 1)) + min];
+        var likes = [Math.floor(Math.random() * (max - min + 1)) + min];
+
+        var embed = new Discord.RichEmbed()
+        .setColor(0xFFFFFF)
+        .setAuthor(`rock, paper, scissors!!!`)
+        .addField(`your pick`, rps_choice, true)
+        .addField(`pengu's pick`, bot_rps_choice, true)
+        ;
+
+
+        if (rps_choice == rps_symbols[0] && bot_rps_choice == rps_symbols[2] ||
+            rps_choice == rps_symbols[1] && bot_rps_choice == rps_symbols[0] ||
+            rps_choice == rps_symbols[2] && bot_rps_choice == rps_symbols[1]) {
+              embed.addField('Results', rps_outcomes[0]);
+            }
+            else if (rps_choice == rps_symbols[0] && bot_rps_choice == rps_symbols[1] ||
+                     rps_choice == rps_symbols[1] && bot_rps_choice == rps_symbols[2] ||
+                     rps_choice == rps_symbols[2] && bot_rps_choice == rps_symbols[0]) {
+                       embed.addField('Results', rps_outcomes[1]);
+                     }
+        else {
+          embed.addField('Results', rps_outcomes[2]);
+        }
+
+        message.channel.send(embed);
+          break;
   }
 
 });
-
 
 
 bot.login(process.env.BOT_TOKEN)
