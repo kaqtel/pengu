@@ -32,13 +32,14 @@ const result_footer = [
 const rps_symbols = [
   "🌑",
   "📄",
-  "✂"
+  "✂",
+  "🔫"
 ];
 
 const rps_outcomes = [
   "winner winner chicken dinner",
-  "so sad :( , can this hit 0 likes",
-  "accident"
+  "accident",
+  "looks like somebody is a MASSIVE scammer"
 ];
 
 
@@ -193,7 +194,7 @@ bot.on("message", function(message) {
       case "8ball":
         if (message.content == ('8ball')) {
           let log = `someone did not ask a QUESTION`;
-          message.reply(`YOU DIDNT ASK ANYTHING!!!`)
+          message.reply(`you need to actually need to ask something`)
           .then(console.log(log))
           .catch(console.error);
           return log;
@@ -301,9 +302,9 @@ bot.on("message", function(message) {
       case "rps":
         let rps_choice = message.content.substring((`rps `).length);
 
-        if (rps_choice != 'r' && rps_choice != 'p' && rps_choice != 's') {
-          let log = `someone did not properly play rock paper gun`;
-          message.reply(`You actually need to choose an option.`)
+        if (rps_choice != 'r' && rps_choice != 'p' && rps_choice != 's' && rps_choice != 'g' && rps_choice != 'gun' && rps_choice != 'rock' && rps_choice != 'paper' && rps_choice != 'scissors' && rps_choice != 'scissor') {
+          let log = `someone didnt do rps correctly`;
+          message.reply(`you need to choose something`)
           .then(console.log(log))
           .catch(console.error);
           return log;
@@ -318,38 +319,64 @@ bot.on("message", function(message) {
         else if (rps_choice == 's') {
           rps_choice = rps_symbols[2];
         }
+        else if (rps_choice == 'g') {
+          rps_choice = rps_symbols[3];
+        }
+        else if (rps_choice == 'gun') {
+          rps_choice = rps_symbols[3];
+        }
+        else if (rps_choice == 'rock') {
+          rps_choice = rps_symbols[0];
+        }
+        else if (rps_choice == 'paper') {
+          rps_choice = rps_symbols[1];
+        }
+        else if (rps_choice == 'scissor') {
+          rps_choice = rps_symbols[2];
+        }
+        else if (rps_choice == 'scissors') {
+          rps_choice = rps_symbols[2];
+        }
 
         var min = 0;
         var max = 2;
         var bot_rps_choice = rps_symbols[Math.floor(Math.random() * (max - min + 1)) + min];
-        var likes = [Math.floor(Math.random() * (max - min + 1)) + min];
+        var bot_like = Math.floor(Math.random() * (max - min + 1)) + min;
 
         var embed = new Discord.RichEmbed()
         .setColor(0xFFFFFF)
         .setAuthor(`rock, paper, scissors!!!`)
         .addField(`your pick`, rps_choice, true)
         .addField(`pengu's pick`, bot_rps_choice, true)
-        ;
-
 
         if (rps_choice == rps_symbols[0] && bot_rps_choice == rps_symbols[2] ||
             rps_choice == rps_symbols[1] && bot_rps_choice == rps_symbols[0] ||
             rps_choice == rps_symbols[2] && bot_rps_choice == rps_symbols[1]) {
               embed.addField('Results', rps_outcomes[0]);
+              embed.setColor(0x00FF00)
             }
-            else if (rps_choice == rps_symbols[0] && bot_rps_choice == rps_symbols[1] ||
-                     rps_choice == rps_symbols[1] && bot_rps_choice == rps_symbols[2] ||
-                     rps_choice == rps_symbols[2] && bot_rps_choice == rps_symbols[0]) {
+            else if (rps_choice == rps_symbols[0] && bot_rps_choice == rps_symbols[0] ||
+                     rps_choice == rps_symbols[1] && bot_rps_choice == rps_symbols[1] ||
+                     rps_choice == rps_symbols[2] && bot_rps_choice == rps_symbols[2]) {
                        embed.addField('Results', rps_outcomes[1]);
+                       embed.setColor(0xFFFFFF)
                      }
+                     else if (rps_choice == rps_symbols[3] && bot_rps_choice == rps_symbols[0] ||
+                              rps_choice == rps_symbols[3] && bot_rps_choice == rps_symbols[1] ||
+                              rps_choice == rps_symbols[3] && bot_rps_choice == rps_symbols[2]) {
+                                embed.addField('Results', rps_outcomes[2]);
+                                embed.setColor(0xFFFF00)
+                              }
         else {
-          embed.addField('Results', rps_outcomes[2]);
+          embed.addField('Results', `so sad :( , can this hit ${bot_like} likes`);
+          embed.setColor(0xFF0000)
         }
 
         message.channel.send(embed);
           break;
-  }
-
+        
+    }
+  
 });
 
 
